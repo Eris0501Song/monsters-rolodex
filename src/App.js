@@ -1,4 +1,5 @@
 import React, { Component } from 'react'; 
+import { HashRouter } from "react-router-dom";
 import {CardList} from './components/card-list/card-list.component';
 import {Searchbox} from './components/card-list/search-box/search-box.component';
 import './App.css';
@@ -42,21 +43,25 @@ class App extends Component{
       monster.name.toLowerCase().includes(searchField.toLowerCase())
       );
     return(
-    <div className='App'>
-      {/* ⚠️⚠️⚠️⚠️onChange作用是input内容一发生改变就执行onChange内的内容; e代表event; e.target.value代表被input的内容, 用于提取存储*/}
-    <h1> Monsters Rolodex</h1>
-    <Searchbox
-      placeholder = 'search monsters'
-      handleChange = { e => this.setState({ searchField: e.target.value })} 
-    />
-    <CardList monsters={filterMonsters} /> 
-        {/* 🚥 <p>f
-          {this.state.string}
-              </p>
-        🍦🍦🍦🍦🍦这里使用setState是因为jsx是one-way data flow, 不能写this.state.string来试图改变之前的state, 
-        所以只能用setstate 来定义一个新值,然后让render() rerun. very important!!!
-        <button onClick={ () => this.setState({ string: 'Hello Kelun' })}>Change Text</button> */}
-    </div>
+      <div>
+        <HashRouter>
+        <div className='App'>
+          {/* ⚠️⚠️⚠️⚠️onChange作用是input内容一发生改变就执行onChange内的内容; e代表event; e.target.value代表被input的内容, 用于提取存储*/}
+          <h1> Monsters Rolodex</h1>
+          <Searchbox
+            placeholder = 'search monsters'
+            handleChange = { e => this.setState({ searchField: e.target.value })} 
+          />
+          <CardList monsters={filterMonsters} /> 
+              {/* 🚥 <p>f
+                {this.state.string}
+                    </p>
+              🍦🍦🍦🍦🍦这里使用setState是因为jsx是one-way data flow, 不能写this.state.string来试图改变之前的state, 
+              所以只能用setstate 来定义一个新值,然后让render() rerun. very important!!!
+              <button onClick={ () => this.setState({ string: 'Hello Kelun' })}>Change Text</button> */}
+        </div>
+        </HashRouter>
+      </div>
     )
   };
 }
